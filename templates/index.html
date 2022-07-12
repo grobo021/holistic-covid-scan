@@ -44,7 +44,7 @@
                     <h2 class="subtitle">Upload the chest x-ray image</h2>
                     <form action="/" method="POST" enctype="multipart/form-data">
                         <div>
-                            <div id="file" class="file is-boxed has-name">
+                            <div id="file-upload" class="file is-boxed has-name">
                                 <label class="file-label">
                                     <input class="file-input" type="file" id="file" autocomplete="off" required>
                                     <span class="file-cta">
@@ -77,16 +77,16 @@
                                 document.getElementById('prediction').removeAttribute('hidden')
                             </script>
                             <h2 class="subtitle" style="color: azure;">Sorry.. You're covid positive. Get well
-                                soon!</h1>
-                                {% elif messages[0] == "Normal" %}
-                                <script>
-                                    document.getElementById('prediction').classList.add('is-primary')
-                                    document.getElementById('prediction').classList.remove('is-danger')
-                                    document.getElementById('prediction').removeAttribute('hidden')
-                                </script>
-                                <h2 class="subtitle" style="color: azure;">Hooray! You're Completely fine.</h1>
-                                    {% endif %}
-                                    <button id="delete" class="delete"></button>
+                                soon!</h2>
+                            {% elif messages[0] == "Normal" %}
+                            <script>
+                                document.getElementById('prediction').classList.add('is-primary')
+                                document.getElementById('prediction').classList.remove('is-danger')
+                                document.getElementById('prediction').removeAttribute('hidden')
+                            </script>
+                            <h2 class="subtitle" style="color: azure;">Hooray! You're Completely fine.</h2>
+                            {% endif %}
+                            <button id="delete" class="delete"></button>
                         </div>
                         <div class="message-body">
                             <figure class="image">
@@ -106,26 +106,25 @@
         <p>
         <div class="p-3 mb-2 bg-light text-gray">
             <h5>Note:-</h5> AI will produce random results if the image is not an x-ray. <br>
-            You can get some sample images for testing <a
-                href="https://drive.google.com/drive/folders/1GzLEz-t8f0qc0e9ylZueBn1lHZJfbkTK?usp=sharing">here</a>.
-            <br>
             Code is avaliable <a href="https://github.com/techno021/covid19_classification" target="_blank">here</a>.
             <br>
             Dataset is avaliable <a href="https://www.kaggle.com/prashant268/chest-xray-covid19-pneumonia"
                                     target="_blank">here</a>.
             </p></div>
         <a id="sdg"></a>
-        <div class="p-3 mb-2 bg-success text-white text-center">
+        <div class="p-3 mb-2 bg-success text-white">
+            <div class=" text-center">
+                <img src="./images/goal.png">
+            </div>
 
-        <div>
-            <img src="./images/goal.png">
-        </div>
-
+            <ol class="p-5">
+                <li>SDG 3 states that we must ensure healthy lives and promote well-being for all no matter their age</li>
+                <li>The goal of this project is to get people tested for covid as quick as possible, with a simple x-ray of the chest of the patient</li>
+                <li>This helps SDG 3 as it guarantees quick access to any required treatment, ensuring healthy lives for many people</li>
+            </ol>
         </div>
         <div class="p-1 mb-2 bg-light text-gray">
-
-
-            <h2 class="display-5  text-center">HIGHLIGHTS</h2>
+            <h2 class="display-5 text-center">HIGHLIGHTS</h2>
             <ol class="p-5">
                 <li>Comparing CT scan and chest X-ray imaging for COVID-19 diagnosis.</li>
                 <li>Distinguishing COVID-19 patients from negative cases.</li>
@@ -133,8 +132,6 @@
                     RT-PCR technique.
                 </li>
             </ol>
-
-
         </div>
         <a id="tech-stack"></a>
         <div class="p-3 mb-1 bg-white text-gray text-center">
