@@ -2,136 +2,178 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Covid19 Pneumonia Classification</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-  <script src="https://kit.fontawesome.com/" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta id="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holistic CoVID Scan</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <script src="https://kit.fontawesome.com/ba185bd559.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
-<body>
-  <section class="section">
-    <div class="container">
-      <h1 class="title">Covid-19 Classification using Machine Learning</h1>
+<body class="mt-3">
+<!--Header Start-->
 
-      <div class="columns">
-        <div class="column">
-          <h2 class="subtitle">Upload the chest x-ray image</h2>
-          <form action="/" method="POST" enctype="multipart/form-data">
-            <dl>
-              <div class="field">
-                <div id="file" class="file is-boxed has-name">
-                  <label class="file-label">
-                    <input class="file-input" type="file" name="file" autocomplete="off" required>
-                    <span class="file-cta">
-                      <span class="file-icon">
-                        <i class="fas fa-upload"></i>
-                      </span>
-                      <span class="file-label">
-                        Choose a file…
-                      </span>
-                    </span>
-                    <span class="file-name">
-                      No file uploaded
-                    </span>
-                  </label>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+        <img src="./images/logo-holoistic1.png">
+        <!-- <a href="#" class="navbar-brand"> Holistic CoVID Scan</a> -->
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav  ms-auto">
+                <a href="#" class="nav-item nav-link active">Home</a>
+                <a href="#" class="nav-item nav-link">Scan</a>
+                <a href="#sdg" class="nav-item nav-link">SDG3</a>
+                <a href="#tech-stack" class="nav-item nav-link">Tech Stack</a>
+            </div>
+
+        </div>
+    </div>
+</nav>
+
+<!--Header Close-->
+<div class="container-fluid">
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Covid-19 Classification using Machine Learning</h1>
+
+            <div class="columns">
+                <div class="column">
+                    <h2 class="subtitle">Upload the chest x-ray image</h2>
+                    <form action="/" method="POST" enctype="multipart/form-data">
+                        <div>
+                            <div id="file" class="file is-boxed has-name">
+                                <label class="file-label">
+                                    <input class="file-input" type="file" id="file" autocomplete="off" required>
+                                    <span class="file-cta">
+                                            <span class="file-icon">
+                                                <i class="fas fa-upload"></i>
+                                            </span>
+                                            <span class="file-label">
+                                                Choose a file…
+                                            </span>
+                                    </span>
+                                    <span class="file-name">
+                                        No file uploaded
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <br>
+                        <button class="button is-link is-light" type="submit">Submit</button>
+                    </form>
                 </div>
-              </div>
-            </dl>
+
+                <div class="column">
+                    <div id="prediction" class="message" hidden>
+                        {% with messages = get_flashed_messages() %}
+                        <div class="message-header">
+                            {% if messages[0] == "COVID19" %}
+                            <script>
+                                document.getElementById('prediction').classList.add('is-danger')
+                                document.getElementById('prediction').classList.remove('is-primary')
+                                document.getElementById('prediction').removeAttribute('hidden')
+                            </script>
+                            <h2 class="subtitle" style="color: azure;">Sorry.. You're covid positive. Get well
+                                soon!</h1>
+                                {% elif messages[0] == "Normal" %}
+                                <script>
+                                    document.getElementById('prediction').classList.add('is-primary')
+                                    document.getElementById('prediction').classList.remove('is-danger')
+                                    document.getElementById('prediction').removeAttribute('hidden')
+                                </script>
+                                <h2 class="subtitle" style="color: azure;">Hooray! You're Completely fine.</h1>
+                                    {% endif %}
+                                    <button id="delete" class="delete"></button>
+                        </div>
+                        <div class="message-body">
+                            <figure class="image">
+                                <img style="width: 150px; height: 150px;" src={{ messages[1] }}>
+                            </figure>
+                        </div>
+                        {% endwith %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+<div class="container-fluid">
+    <div class="row no-pad">
+        <p>
+        <div class="p-3 mb-2 bg-light text-gray">
+            <h5>Note:-</h5> AI will produce random results if the image is not an x-ray. <br>
+            You can get some sample images for testing <a
+                href="https://drive.google.com/drive/folders/1GzLEz-t8f0qc0e9ylZueBn1lHZJfbkTK?usp=sharing">here</a>.
             <br>
-            <button class="button is-link is-light" type="submit">Submit</button>
-          </form>
+            Code is avaliable <a href="https://github.com/techno021/covid19_classification" target="_blank">here</a>.
+            <br>
+            Dataset is avaliable <a href="https://www.kaggle.com/prashant268/chest-xray-covid19-pneumonia"
+                                    target="_blank">here</a>.
+            </p></div>
+        <a id="sdg"></a>
+        <div class="p-3 mb-2 bg-success text-white text-center">
+
+        <div>
+            <img src="./images/goal.png">
         </div>
 
-        <div class="column">
-          <div id="prediction" class="message" hidden>
-            {% with messages = get_flashed_messages() %}
-            <div class="message-header">
-              {% if messages[0] == "COVID19" %}
-              <script>
-                document.getElementById('prediction').classList.add('is-danger')
-                document.getElementById('prediction').classList.remove('is-primary')
-                document.getElementById('prediction').removeAttribute('hidden')
-              </script>
-              <h2 class="subtitle" style="color: azure;">Sorry.. You're covid positive. Get well soon!</h1>
-                {% elif messages[0] == "Normal" %}
-                <script>
-                  document.getElementById('prediction').classList.add('is-primary')
-                  document.getElementById('prediction').classList.remove('is-danger')
-                  document.getElementById('prediction').removeAttribute('hidden')
-                </script>
-                <h2 class="subtitle" style="color: azure;">Hooray! You're Completely fine.</h1>
-                  {% endif %}
-                  <button id="delete" class="delete"></button>
+        </div>
+        <div class="p-1 mb-2 bg-light text-gray">
+
+
+            <h2 class="display-5  text-center">HIGHLIGHTS</h2>
+            <ol class="p-5">
+                <li>Comparing CT scan and chest X-ray imaging for COVID-19 diagnosis.</li>
+                <li>Distinguishing COVID-19 patients from negative cases.</li>
+                <li>Providing accurate and efficient approach to detect COVID-19 patients, that outperform the current
+                    RT-PCR technique.
+                </li>
+            </ol>
+
+
+        </div>
+        <a id="tech-stack"></a>
+        <div class="p-3 mb-1 bg-white text-gray text-center">
+
+
+            <div class="columns">
+                <div class="column">
+                    <h2 class="display-2">Tech Stack</h2>
+                    <img src="./images/tensorflow.png">
+                    <img src="./images/flask.png">
+                    <img src="./images/keras.png">
+                    <img src="./images/javascript-logo-hq-png-1.png">
+                    <img src="./images/bootstrap.png">
+                </div>
+
             </div>
-            <div class="message-body">
-              <figure class="image">
-                <img src={{ messages[1] }} style="width: 150px; height: 150px;">
-              </figure>
-            </div>
-            {% endwith %}
-          </div>
+            </p>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <footer class="footer">
-    <div class="content">
-      <p>
-        <strong>Note</strong>:- AI will produce random results if the image is not an x-ray. <br>
-        You can get some sample images for testing <a href="https://drive.google.com/drive/folders/1GzLEz-t8f0qc0e9ylZueBn1lHZJfbkTK?usp=sharing">here</a>. <br>
-        Code is avaliable <a href="https://github.com/techno021/covid19_classification" target="_blank">here</a>. <br>
-        Dataset is avaliable <a href="https://www.kaggle.com/prashant268/chest-xray-covid19-pneumonia" target="_blank">here</a>.
-        <div class="columns">
-          <div class="column">
-            <strong>Tech Stack</strong>
-            <ul>
-              <li>Tensorflow 2.3</li>
-              <li>Flask</li>
-              <li>Keras</li>
-              <li>Python</li>
-              <li>Bulma (UI)</li>
-              <li>Javascript</li>
-              <li>HTML</li>
-            </ul>
-          </div>
-          <div class="column">
-            <strong>Socials</strong>
-            <ul>
-              <li>
-                <span class="icon">
-                  <i class="fab fa-github-alt"></i>
-                </span>
-                <a href="https://github.com/Techno021">@Techno021</a>
-              </li>
-              <li>
-                <span class="icon">
-                  <i class="fab fa-youtube"></i>
-                </span>
-                <a href="https://www.youtube.com/channel/UCjo4sZ-G8ExZpGATmUrKKkA?view_as=subscriber">@Techno021</a>
-                Please subscribe!
-              </li>
-            </ul>
-          </div>
+        <div class="p-5 bg-dark text-white text-center">
+            OPG World School<br>
+            Rishab Arora • Aditya Panda
         </div>
-      </p>
     </div>
-  </footer>
+</div>
 
-  <script>
+<script>
     const fileInput = document.querySelector('#file input[type=file]');
     fileInput.onchange = () => {
-      if (fileInput.files.length > 0) {
-        const fileName = document.querySelector('#file .file-name');
-        fileName.textContent = fileInput.files[0].name;
-      }
+        if (fileInput.files.length > 0) {
+            const fileName = document.querySelector('#file .file-name');
+            fileName.textContent = fileInput.files[0].name;
+        }
     }
 
     document.querySelector('#delete').addEventListener('click', () => {
-      document.querySelector('#prediction').setAttribute('hidden', true)
+        document.querySelector('#prediction').setAttribute('hidden', true)
     })
-  </script>
+</script>
 </body>
 
 </html>
