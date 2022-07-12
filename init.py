@@ -34,10 +34,6 @@ def submit_file():
             return redirect(request.url)
 
         if file:
-            if os.path.exists('upload'):
-                os.rmdir('upload')
-
-            os.mkdir('./upload')
             filename = secure_filename(file.filename)
             path = os.path.join('upload', filename)
             file.save(path)
